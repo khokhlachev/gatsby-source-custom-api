@@ -6,6 +6,7 @@ module.exports = (env, url) => {
     return
   }
   if (typeof url === 'string') return url
+
   const URL = env === 'production'
     ? url.production
     : url.development

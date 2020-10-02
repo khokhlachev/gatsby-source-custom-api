@@ -21,8 +21,12 @@ exports.sourceNodes = async (
     schemas = {}
   } = configOptions
 
-  const URL = getUrl(process.env.NODE_ENV, url)
-  const data = await fetch(URL).then(res => res.json())
+
+  const URLObjOrString = getUrl(process.env.NODE_ENV, url)
+  const params = typeof URLObjOrString === 'object' ? URLObjOrString.params : undefined;
+  const url = typeof URLObjOrString === 'object' ? URLObjOrString.url : URLObjOrString;
+
+  const data = await fetch(URL, params).then(res => res.json())
 
   const typeDefs = getTypeDefs(schemas, imageKeys)
   createTypes(typeDefs)
