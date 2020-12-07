@@ -18,7 +18,8 @@ exports.sourceNodes = async (
     url,
     rootKey = 'customAPI',
     imageKeys = ['image'],
-    schemas = {}
+    schemas = {},
+    defaultExt
   } = configOptions
 
 
@@ -47,7 +48,7 @@ exports.sourceNodes = async (
 
   // load images or default-dummy-image
   entities = await loadImages({
-    entities, imageKeys, createNode, createNodeId, touchNode, store, cache, createContentDigest
+    entities, imageKeys, createNode, createNodeId, touchNode, store, cache, createContentDigest, ext: defaultExt
   })
 
   // build gatsby-node-object

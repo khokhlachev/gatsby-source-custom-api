@@ -12,6 +12,7 @@ async function createImageNodes({
   cache,
   imageName,
   imageCacheKey,
+  ext,
 }) {
   let fileNode;
   try {
@@ -21,6 +22,7 @@ async function createImageNodes({
       cache,
       createNode,
       createNodeId,
+      ext,
     });
   } catch (e) {
     console.log(e);
@@ -50,6 +52,7 @@ async function loadImages({
   store,
   cache,
   touchNode,
+  ext,
 }) {
   return Promise.all(
     entities.map(async (entity) => {
@@ -86,6 +89,7 @@ async function loadImages({
         cache,
         imageName,
         imageCacheKey,
+        ext,
       });
     })
   );
