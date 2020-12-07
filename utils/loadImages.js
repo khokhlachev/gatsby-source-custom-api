@@ -42,19 +42,6 @@ async function createImageNodes({
   return entity;
 }
 
-function extensionIsValid(url) {
-  const extWithQueryMaybe = url.split(".").pop().split("/")[0];
-  const [ext] = extWithQueryMaybe.split("?");
-  switch (ext) {
-    case "jpg":
-    case "jpeg":
-    case "png":
-      return true;
-    default:
-      return false;
-  }
-}
-
 async function loadImages({
   entities,
   imageKeys,
@@ -69,10 +56,7 @@ async function loadImages({
       if (!isImageKey(entity.name, imageKeys) || !entity.data.url) {
         return Promise.resolve(entity);
       }
-      if (!extensionIsValid(entity.data.url)) {
-        console.log(`Image-Extension not valid: ${entity.data.url}`);
-        return Promise.resolve(entity);
-      }
+
       const imageName = entity.data.url.match(/([^/]*)\/*$/)[1];
       const imageCacheKey = `local-image-${imageName}`;
       const cachedImage = await cache.get(imageCacheKey);
